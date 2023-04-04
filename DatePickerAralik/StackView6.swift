@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct StackView6: View {
+struct StackView7: View {
+    
     @State private var selectedDates: Set<DateComponents> = []
     @State private var formattedDates: String = ""
     
@@ -17,7 +18,7 @@ struct StackView6: View {
     
     var body: some View {
         VStack {
-            Text("TouristApp")
+            Text("DevTechie!")
                 .font(.largeTitle)
                 .foregroundColor(.primary)
             MultiDatePicker("Travel Dates", selection: $selectedDates, in: fromDate..<toDate)
@@ -31,6 +32,11 @@ struct StackView6: View {
                 }
             }
             .frame(maxWidth: .infinity)
+            
+            Button("Paylaş") {
+                share()
+            }
+            .padding()
         }
         .padding()
     }
@@ -46,10 +52,16 @@ struct StackView6: View {
             }
         formattedDates = dates.joined(separator: "\n")
     }
+    
+    private func share() {
+        let shareText = "Seçili tarihler:\n\(formattedDates)"
+        let avc = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(avc, animated: true, completion: nil)
+    }
 }
 
-struct StackView6_Previews: PreviewProvider {
+struct StackView7_Previews: PreviewProvider {
     static var previews: some View {
-        StackView6()
+        StackView7()
     }
 }
